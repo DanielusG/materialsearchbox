@@ -1,14 +1,15 @@
 name: materialsearchbox_ui
 description: UI for test materialsearchbox
 version: 1.0.0+1
-
+publish_to: none
 environment:
   sdk: '>=3.0.5 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-
+  materialsearchbox: 
+    path: ../materialsearchbox
 dev_dependencies:
   flutter_test:
     sdk: flutter
