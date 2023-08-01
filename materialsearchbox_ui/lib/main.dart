@@ -30,17 +30,44 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  final List<String> dataset = ['Item One', 'Item Two', 'Item Three', 'Item Four', 'Item Five', 'Item Six', 'Item Seven', 'Item Eight', 'Item Nine', 'Item Ten'];
+  final List<String> cities = [
+    'New York',
+    'Los Angeles',
+    'Chicago',
+    'Houston',
+    'Phoenix',
+    'Philadelphia',
+    'San Antonio',
+    'San Diego',
+    'Dallas',
+    'San Jose',
+    'Austin',
+    'Jacksonville',
+    'Rome',
+    'Milan',
+    'Naples',
+    'Turin',
+    'Palermo',
+    'Genoa',
+    'Bologna',
+    'Florence',
+    'Fiumicino',
+    'Catania',
+    'Venice',
+    'Verona',
+    'Messina',
+    'Padua',
+  ];
   List<String> onSearch(String value) {
     List<String> result = [];
-    for (String item in dataset) {
+    for (String item in cities) {
       if (item.toLowerCase().contains(value.toLowerCase())) {
         result.add(item);
       }
     }
     return result;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
