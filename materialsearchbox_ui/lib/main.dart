@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Demo search box',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
+      theme: ThemeData.light(useMaterial3: true),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -85,6 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialSearchBox(
               width: 400,
               onSearch: onSearch,
+              onSelected: (index, value) {
+                print(value);
+              },
             ),
           ],
         ),
