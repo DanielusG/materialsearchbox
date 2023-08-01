@@ -6,13 +6,15 @@ Search data from list, easy and flexible to use
 
 ## Getting started
 
-flutter pub add materialsearchbox
+`flutter pub add materialsearchbox`
 
 ## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:materialsearchbox/materialsearchbox.dart';
+
+return MaterialSearchBox(
+  onSearch: (String search) {
+    // Do something
+  },
+);
 ```
