@@ -1,0 +1,17 @@
+name: materialsearchbox
+description: A beautiful and easy to implement search box for flutter
+version: 0.0.1
+homepage: https://github.com/DanielusG/materialsearchbox
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
