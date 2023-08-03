@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'Messina',
     'Padua',
   ];
-  List<String> onSearch(String value) {
+  Future<List<String>> onSearch(String value) async {
     List<String> result = [];
     for (String item in cities) {
       if (item.toLowerCase().contains(value.toLowerCase())) {

@@ -23,7 +23,7 @@ class MaterialSearchBox extends StatefulWidget {
   final double width;
 
   /// The function that will be called when the user types in the search box
-  final List<String> Function(String) onSearch;
+  final Future<List<String>> Function(String) onSearch;
 
   /// The function that will be called when the user selects an item from the result box
   final void Function(int index, String value)? onSelected;
@@ -41,7 +41,7 @@ class _MaterialSearchBoxState extends State<MaterialSearchBox> {
   List<String> data = [];
   @override
   void initState() {
-    data = widget.onSearch('');
+    widget.onSearch('').then((value) => setState(() => data = value));
     super.initState();
   }
 
@@ -52,9 +52,10 @@ class _MaterialSearchBoxState extends State<MaterialSearchBox> {
       child: Column(
         children: [
           TextFieldSearchBar(
-            onChanged: (value) {
+            onChanged: (value) async{
+              data = await widget.onSearch(value);
               setState(() {
-                data = widget.onSearch(value);
+                
               });
             },
           ),
