@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:materialsearchbox/src/item.dart';
 import 'package:materialsearchbox/src/result_box.dart';
 import 'package:materialsearchbox/src/text_field.dart';
 
-class MaterialSearchBox extends StatefulWidget {
+class MaterialSearchBox<T> extends StatefulWidget {
   const MaterialSearchBox(
-      {super.key,
+      {Key? key,
       this.maxHeight = 200,
       this.width = 200,
       required this.onSearch,
@@ -14,7 +15,8 @@ class MaterialSearchBox extends StatefulWidget {
       : assert(maxHeight > 0),
         assert(width > 0),
         // onSelected and itemBuilder can't be non-null at the same time;
-        assert(onSelected == null || itemBuilder == null);
+        assert(onSelected == null || itemBuilder == null),
+        super(key: key);
 
   /// The maximum height of the result box
   final double maxHeight;
@@ -23,25 +25,25 @@ class MaterialSearchBox extends StatefulWidget {
   final double width;
 
   /// The function that will be called when the user types in the search box
-  final Future<List<String>> Function(String) onSearch;
+  final Future<List<Item<T>>> Function(String) onSearch;
 
   /// The function that will be called when the user selects an item from the result box
-  final void Function(int index, String value)? onSelected;
+  final void Function(int index, Item<T> item)? onSelected;
 
   /// Item builder for the result box
   /// 
   /// if this is not null, [onSelected] must be null and handle the selection in the [itemBuilder]
-  final Widget Function(BuildContext context, int index, String value)?
+  final Widget Function(BuildContext context, int index, Item<T> item)?
       itemBuilder;
   @override
-  State<MaterialSearchBox> createState() => _MaterialSearchBoxState();
+  State<MaterialSearchBox<T>> createState() => _MaterialSearchBoxState<T>();
 }
 
-class _MaterialSearchBoxState extends State<MaterialSearchBox> {
-  List<String> data = [];
+class _MaterialSearchBoxState<T> extends State<MaterialSearchBox<T>> {
+  List<Item<T>> data = [];
   @override
   void initState() {
-    widget.onSearch('').then((value) => setState(() => data = value));
+    widget.onSearch('').then((List<Item<dynamic>> value) => setState(() => data = value as List<Item<T>>));
     super.initState();
   }
 
@@ -59,10 +61,10 @@ class _MaterialSearchBoxState extends State<MaterialSearchBox> {
               });
             },
           ),
-          ResultBox(
+          ResultBox<T>(
             data: data,
             maxHeight: widget.maxHeight,
-            onSelected: widget.onSelected,
+            onSelected: widget.onSelected == null ? null : (index, item) => widget.onSelected!(index, item),
             itemBuilder: widget.itemBuilder,
           )
         ],

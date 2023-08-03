@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:materialsearchbox/src/item.dart';
 
-class ResultBox extends StatelessWidget {
+class ResultBox<T> extends StatelessWidget {
   const ResultBox(
       {super.key,
       required this.data,
       required this.maxHeight,
       required this.onSelected,
       required this.itemBuilder});
-  final List<String> data;
+  final List<Item<T>> data;
   final double maxHeight;
-  final void Function(int index, String value)? onSelected;
-  final Widget Function(BuildContext context, int index, String value)?
+  final void Function(int index, Item<T> item)? onSelected;
+  final Widget Function(BuildContext context, int index, Item<T> value)?
       itemBuilder;
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(maxHeight: maxHeight),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(10),
           bottomRight: Radius.circular(10),
@@ -53,7 +54,7 @@ class ResultBox extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(0)),
                     ),
                   ),
-                  child: Text(data[index]));
+                  child: Text(data[index].name));
             }),
       ),
     );

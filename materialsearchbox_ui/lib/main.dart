@@ -55,11 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
     'Messina',
     'Padua',
   ];
-  Future<List<String>> onSearch(String value) async {
-    List<String> result = [];
+  Future<List<Item<String>>> onSearch(String value) async {
+    List<Item<String>> result = [];
     for (String item in cities) {
       if (item.toLowerCase().contains(value.toLowerCase())) {
-        result.add(item);
+        result.add(Item(item, item));
       }
     }
     return result;
@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Search for a city:',
             ),
-            MaterialSearchBox(
+            MaterialSearchBox<String>(
               width: 400,
               onSearch: onSearch,
               onSelected: (index, value) {
